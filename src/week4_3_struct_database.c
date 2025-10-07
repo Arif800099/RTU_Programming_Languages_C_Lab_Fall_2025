@@ -12,17 +12,35 @@
 #include <stdlib.h>
 #include <string.h>
 
+struct Student {
+    char name[50];
+    int id;
+    float grade;
+};
+
 // TODO: Define struct Student with fields name, id, grade
 
-int main(void) {
-    int n;
-    struct Student *students = NULL;
+
+ int main() {
+    int n, i;
+    struct Student *students;
 
     printf("Enter number of students: ");
-    if (scanf("%d", &n) != 1 || n <= 0) {
-        printf("Invalid number.\n");
-        return 1;
+    scanf("%d", &n);
+
+    students = malloc(n * sizeof(struct Student));
+
+    for (i = 0; i < n; i++) {
+        printf("Enter data for student %d: ", i + 1);
+        scanf("%s %d %f", students[i].name, &students[i].id, &students[i].grade);
     }
+
+    printf("\nID     Name        Grade\n");
+    for (i = 0; i < n; i++) {
+        printf("%-6d %-12s %.1f\n", students[i].id, students[i].name, students[i].grade);
+    }
+
+    free(students);
 
     // TODO: Allocate memory for n Student structs using malloc
 
